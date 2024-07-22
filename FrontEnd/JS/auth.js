@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     const authvalid = document.getElementById("authvalid");
     const authToken = localStorage.getItem('authToken');
+    const userRole = localStorage.getItem('userRole');
 
     // Affiche ou cache le lien de connexion/déconnexion selon l'état d'authentification
     if (authToken) {
         authvalid.innerHTML = "logout";
         authvalid.href = "#"; // Empêche la redirection par défaut
-        authvalid.style.fontWeight = 'bold'; // Rend le texte plus gras
         authvalid.style.fontSize = '16.8px'; // Ajuste la taille du texte si nécessaire
         authvalid.style.padding = '0 10px'; // Ajout du padding
     } else {

@@ -3,27 +3,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const authvalid = document.getElementById("authvalid");
     const authToken = localStorage.getItem('authToken');
     const userRole = localStorage.getItem('userRole'); // Récupère le rôle de l'utilisateur (si nécessaire)
+    const editionMode = document.getElementById('editionmode');
+    
+    // Edition mode bannière
+    if (editionMode) {
+        if (authToken && userRole === 'editionMode', 'editionAdmin') {
+            editionMode.style.display = 'flex'; // Affiche le mode édition
+        } if (!authToken && !userRole) {
+            editionMode.style.display = 'none'; // Cache le mode édition
+        }
+    }
 
     // Crée et ajoute le message d'erreur au DOM
     const errorMessage = document.createElement('p');
         errorMessage.id = 'error-message';
-        errorMessage.textContent = 'Informations de connexion incorrectes.';
+        errorMessage.textContent = 'Erreur dans l’identifiant ou le mot de passe';
         errorMessage.style.display = 'none'; // Initialement caché
         errorMessage.style.color = 'red'; // Couleur du texte rouge
     if (loginForm) {
         loginForm.appendChild(errorMessage);
-    }
-
-    // Affiche ou cache le lien de connexion/déconnexion selon l'état d'authentification
-    if (authToken) {
-        authvalid.innerHTML = "logout";
-        authvalid.href = "#"; // Empêche la redirection par défaut
-        authvalid.style.fontWeight = 'bold'; // Rend le texte plus gras
-        authvalid.style.fontSize = '16px'; // Ajuste la taille du texte si nécessaire
-    } else {
-        authvalid.innerHTML = "login";
-        authvalid.href = 'login.html'; // Lien vers la page de connexion
-        authvalid.style.fontWeight = 'normal'; // Réinitialise le style du texte
     }
 
     if (loginForm) {
@@ -39,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Mise à jour de l'état du lien de connexion après une connexion réussie
                 authvalid.innerHTML = "logout";
                 authvalid.href = "#"; // Empêche la redirection par défaut
-                authvalid.style.fontWeight = 'bold'; // Rend le texte plus gras
                 authvalid.style.fontSize = '16px'; // Ajuste la taille du texte si nécessaire
                 window.location.href = 'index.html'; // Redirige vers la page d'accueil
             } else {
@@ -78,7 +75,7 @@ async function authenticateUser(email, password) {
             return false;
         }
     } catch (error) {
-        console.error('Erreur lors de la tentative d\'authentification', error);
+        console.error('Erreur dans l’identifiant ou le mot de passe', error);
         return false;
     }
 }

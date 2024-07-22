@@ -51,7 +51,7 @@ function renderCategoryFilters(categories) {
 
     // Ajoute le bouton "Tous" une seule fois
     filters.appendChild(createCategoryButton('Tous', () => filterGalleryByCategory(null)));
-
+    
     categories.forEach(category => {
         const categoryKey = category.name; // Utilise le nom comme clé unique
         if (!uniqueCategories.has(categoryKey)) {
