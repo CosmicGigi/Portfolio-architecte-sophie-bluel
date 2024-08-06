@@ -18,12 +18,12 @@ function renderGallery(works) {
     const gallery = document.querySelector('.gallery');
     gallery.innerHTML = '';
 
-    const uniqueWorks = new Set(); // Set pour garantir l'unicité des travaux
+    const uniqueWorks = new Set();
     works.forEach(work => {
         // Crée une clé unique pour chaque travail
         const workKey = `${work.imageUrl}-${work.title}`;
         if (!uniqueWorks.has(workKey)) {
-            uniqueWorks.add(workKey); // Ajoute le travail au Set si unique
+            uniqueWorks.add(workKey);
 
             const workElement = createElement('figure', { classes: ['work'] });
             const img = createElement('img', { attributes: { src: work.imageUrl, alt: work.title } });
@@ -80,6 +80,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         const categories = await fetchCategories();
         renderGallery(allWorks);
         renderCategoryFilters(categories);
+    } catch (error) {
+        console.error('Erreur lors du chargement des données:', error);
+    }
+});
+
+window.allWorks = [];
+
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        window.allWorks = await fetchWorks();
     } catch (error) {
         console.error('Erreur lors du chargement des données:', error);
     }

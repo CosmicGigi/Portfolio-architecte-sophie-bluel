@@ -14,6 +14,7 @@
 	<script src="./JS/script.js" defer></script>
 	<script src="./JS/logauth.js" defer></script>
 	<script src="./JS/auth.js" defer></script>
+	<script src="./JS/modal.js" defer></script>
 </head>
 <body>
 <header>
@@ -46,7 +47,39 @@
 		</article>
 	</section>
 	<section id="portfolio">
+		<div class="modal-title">
 		<h2>Mes Projets</h2>
+            <button id="openModalBtn" style="display: none;"><i class="fa-solid fa-pen-to-square"></i>Modifier</button>
+        </div>
+		
+		<div id="modal" class="modal">
+			<div class="modal-content">
+			  <span class="close"></span>
+			  <div id="galleryView" class="modal-view">
+				<h2>Galerie photo</h2>
+				<div id="modalGallery"></div>
+				<button id="addPhotoBtn">Ajouter une photo</button>
+			  </div>
+			  <div id="addPhotoView" class="modal-view" style="display: none;">
+				<i id="backToGalleryBtn" class="fa-solid fa-arrow-left fa-xl backBtn"></i>
+				<h2>Ajout photo</h2>
+				<form id="addPhotoForm">
+					<label for="image">Image</label>
+					<input type="file" id="image" name="image" accept="image/*" required>
+					
+					<label for="title">Titre</label>
+					<input type="text" id="title" name="title" required>
+					
+					<label for="category">Catégorie</label>
+					<select id="category" name="category" required>
+					</select>
+				  
+					<button type="submit">Valider</button>
+				  </form>
+			  </div>
+			</div>
+		  </div>
+		  
 		<div class="filters"></div>
 		<div class="gallery"></div>
 	</section>

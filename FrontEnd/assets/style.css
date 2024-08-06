@@ -242,3 +242,153 @@ footer nav ul {
 	margin: 2em
 }
 
+/* Styles modale */
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-title {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+}
+
+#openModalBtn {
+	border: none;
+	background: white;
+	cursor: pointer;
+	margin-bottom: 20px;
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.modal-content {
+	border-radius: 10px;
+	background-color: #fefefe;
+	margin: 15% auto;
+	padding: 20px;
+	border: none;
+	width: 630px;
+	height: 688px;
+}
+
+#modalGallery {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 10px;
+	padding: 60px;
+	flex-wrap: wrap;
+}
+
+.modal-view h2 {
+	font-style: 'Work Sans';
+	font-weight: 400;
+	font-size: 26px;
+	color: black;
+}
+
+.modal-work img {
+	width: 76.86px;
+	height: 102.57px;
+}
+
+.modal-work p {
+	display: none;
+}
+
+.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+
+.deleteWorkBtn {
+	border: none;
+	color: white;
+	background-color: black;
+
+}
+
+#addPhotoBtn {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px;
+	cursor: pointer;
+}
+
+#addPhotoForm {
+	text-align: left;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+#addPhotoForm input {
+	height: 50px;
+    font-size: 1.2em;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#addPhotoForm form {
+	height: 50px;
+    font-size: 1.2em;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#addPhotoForm label {
+	margin: 2em 0 1em 0;
+}
+
+#addPhotoForm textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#addPhotoForm select {
+	height: 50px;
+    font-size: 1.2em;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+button[type="submit"]{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px;
+	cursor: pointer;
+}
+
+.backBtn {
+	cursor: pointer;
+}
