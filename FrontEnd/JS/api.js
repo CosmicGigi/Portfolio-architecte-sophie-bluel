@@ -1,4 +1,4 @@
-// Fonction pour récupérer les travaux depuis l'API
+/// Fonction pour récupérer les travaux depuis l'API
 // export async function fetchWorks() {
 async function fetchWorks() {
     // Ajouter des try / catch
@@ -13,4 +13,19 @@ async function fetchCategories() {
     return resp.json();
 }
 
-// Idem pour deleteWork
+// Fonction Delete pour travaux
+async function deleteWork(workId) {
+    try {
+      const resp = await fetch(`http://localhost:5678/api/works/${workId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': 'Bearer ' + sessionStorage.getItem('authToken')
+        }
+      });
+      if (!resp.ok) throw new Error('Erreur lors de la suppression');
+    } catch (error) {
+      console.error('Erreur lors de la suppression:', error);
+    }
+  }
+
+  // revoir api categories et travaux (try catch), les corriger dans modal etc, ajouter import/export
