@@ -1,5 +1,4 @@
 // import { fetchWorks, fetchCategories, deleteWork } from "./api.js"
-
 document.addEventListener('DOMContentLoaded', () => {
   const authValid = document.getElementById("authvalid");
   const openModalBtn = document.getElementById('openModalBtn');
@@ -11,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('modal');
   const modalGallery = document.getElementById('modalGallery');
   const addPhotoForm = document.getElementById('addPhotoForm');
+
 
   initializeAuthUI();
   initializeGalleryAndFilters();
@@ -69,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
 //cache modifier fontawesome
   function hideAdminFeatures() {
     openModalBtn.style.display = 'none';
-    if (editionMode) editionMode.style.display = 'none';
   }
 
   function handleAuthClick() {
@@ -170,35 +169,6 @@ async function populateCategorySelect() {
   }
 }
 
-async function handleAddPhoto(event) {
-  event.preventDefault();
-  const form = event.target;
-  const formData = new FormData(form);
-
-  try {
-    const response = await fetch('http://localhost:5678/api/works', {
-      method: 'POST',
-      body: formData,
-      headers: {
-        'Authorization': 'Bearer ' + sessionStorage.getItem('authToken')
-      }
-    });
-
-    if (response.ok) {
-      alert('Photo ajoutée avec succès');
-      const works = await fetchWorks();
-      renderGallery(works);
-      closeModal();
-    } else {
-      console.error('Erreur lors de l\'ajout du travail:', await response.text());
-      alert('Erreur lors de l\'ajout de la photo');
-    }
-  } catch (error) {
-    console.error('Erreur lors de l\'ajout de la photo:', error);
-    alert('Erreur lors de l\'ajout de la photo');
-  }
-}
-
 function setupModal() {
   const modal = document.getElementById('modal');
   const openModalBtn = document.getElementById('openModalBtn');
@@ -226,10 +196,24 @@ function setupModal() {
     galleryView.style.display = 'block';
     addPhotoView.style.display = 'none';
   });
-
-  window.addEventListener('click', (event) => {
-    if (event.target === modal) {
-      closeModal();
-    }
-  });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const addPhotoForm = document.getElementById('addPhotoForm');
+  const imageInput = document.getElementById('imagePreview');
+  const previewImage = document.createElement('img');
+
+  previewImage.style.maxWidth = '100%';
+  previewImage.style.marginTop = '10px';
+
+  if (imageInput) {
+    imageInput.addEventListener('change', handleImagePreview);
+  }
+
+  if (addPhotoForm) {
+    addPhotoForm.addEventListener('submit', handleAddPhoto);
+  }
+
+  setupModal();
+
+});

@@ -56,7 +56,7 @@ function renderCategoryFilters(categories) {
         const categoryKey = category.name; // Utilise le nom comme clé unique
         if (!uniqueCategories.has(categoryKey)) {
             uniqueCategories.add(categoryKey); // Ajoute la catégorie au Set si unique
-
+            
             filters.appendChild(createCategoryButton(category.name, () => filterGalleryByCategory(category.id)));
         }
     });

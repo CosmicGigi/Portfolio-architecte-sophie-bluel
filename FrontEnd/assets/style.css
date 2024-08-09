@@ -282,7 +282,7 @@ footer nav ul {
 
 #modalGallery {
 	display: flex;
-	justify-content: flex-start;
+	justify-content: center;
 	align-items: center;
 	gap: 10px;
 	padding: 60px;
@@ -334,10 +334,15 @@ footer nav ul {
 	color: white;
 	background-color: #1D6154;
 	margin : 2em auto ;
-	width: 180px;
+	width: 237px;
+	height: 36px;
 	text-align: center;
 	border-radius: 60px;
 	cursor: pointer;
+	border: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 #addPhotoForm {
@@ -345,24 +350,29 @@ footer nav ul {
     margin-top: 30px;
     display: flex;
     flex-direction: column;
+	align-items: center;
 }
 
 #addPhotoForm input {
-	height: 50px;
+	width: 420px;
+	height: 169px;
     font-size: 1.2em;
     border: none;
-    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	border-radius: 10px;
+	background: #E8F1F6;
 }
 
-#addPhotoForm form {
+#addPhotoForm #title {
 	height: 50px;
     font-size: 1.2em;
     border: none;
+	background: white;
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
 #addPhotoForm label {
 	margin: 2em 0 1em 0;
+	
 }
 
 #addPhotoForm textarea {
@@ -371,6 +381,7 @@ footer nav ul {
 }
 
 #addPhotoForm select {
+	width: 420px;
 	height: 50px;
     font-size: 1.2em;
     border: none;
@@ -383,10 +394,15 @@ button[type="submit"]{
 	color: white;
 	background-color: #1D6154;
 	margin : 2em auto ;
-	width: 180px;
+	width: 237px;
+	height: 36px;
 	text-align: center;
 	border-radius: 60px;
 	cursor: pointer;
+	border: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .backBtn {
