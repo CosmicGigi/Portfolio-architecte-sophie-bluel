@@ -198,7 +198,7 @@ function setupModal() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+/*document.addEventListener('DOMContentLoaded', () => {
   const addPhotoForm = document.getElementById('addPhotoForm');
   const imageInput = document.getElementById('imagePreview');
   const previewImage = document.createElement('img');
@@ -216,4 +216,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setupModal();
 
-});
+});*/

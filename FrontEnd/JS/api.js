@@ -29,6 +29,12 @@ async function deleteWork(workId) {
               'Authorization': 'Bearer ' + sessionStorage.getItem('authToken')
           }
       });
+
+      if (resp.ok) {
+        alert('La photo a été correctement supprimée.');
+      } else {
+        throw new Error('La suppression a échoué');
+      }
       
   } catch (error) {
       console.error('Erreur lors de la suppression:', error);
@@ -82,7 +88,6 @@ async function handleAddPhoto(event) {
         alert('Erreur lors de l\'ajout de la photo');
       }
     } catch (error) {
-      console.error('Erreur lors de l\'ajout de la photo:', error);
       alert('Erreur lors de l\'ajout de la photo');
     }
   }

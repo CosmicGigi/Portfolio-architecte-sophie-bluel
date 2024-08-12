@@ -325,7 +325,26 @@ footer nav ul {
 	border: none;
 	color: white;
 	background-color: black;
+	position: relative;
+	top: -85px;
+	left: -30px;
+	border-radius: 2px;
+}
 
+/*.deleteWorkBtn i {
+}*/
+
+#galleryView {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.line {
+	border: #B3B3B3 solid 1px;
+	width: 420px;
+	
 }
 
 #addPhotoBtn {
