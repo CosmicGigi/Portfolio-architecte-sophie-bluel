@@ -427,3 +427,14 @@ button[type="submit"]{
 .backBtn {
 	cursor: pointer;
 }
+
+#imagePreview {
+	max-width: 300px;
+	max-height: 300px;
+	object-fit: contain;
+	margin-top: 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 5px;
+
+  }

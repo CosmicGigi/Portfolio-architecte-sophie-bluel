@@ -217,3 +217,38 @@ function setupModal() {
   setupModal();
 
 });*/
+
+document.addEventListener('DOMContentLoaded', () => {
+  const addPhotoForm = document.getElementById('addPhotoForm');
+  const imageInput = document.getElementById('image');
+  const imagePreview = document.getElementById('imagePreview');
+
+  if (imageInput) {
+    imageInput.addEventListener('change', handleImagePreview);
+  }
+
+  if (addPhotoForm) {
+    addPhotoForm.addEventListener('submit', handleAddPhoto);
+  }
+
+  setupModal();
+});
+
+function handleImagePreview(event) {
+  const file = event.target.files[0];
+  const imagePreview = document.getElementById('imagePreview');
+  
+  if (file) {
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+      imagePreview.src = e.target.result;
+      imagePreview.style.display = 'block';
+    }
+    
+    reader.readAsDataURL(file);
+  } else {
+    imagePreview.src = '';
+    imagePreview.style.display = 'none';
+  }
+}
