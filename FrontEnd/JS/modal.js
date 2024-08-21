@@ -178,10 +178,7 @@ function setupModal() {
   const galleryView = document.getElementById('galleryView');
   const addPhotoView = document.getElementById('addPhotoView');
 
-  openModalBtn.addEventListener('click', () => {
-    modal.style.display = 'block';
-    populateCategorySelect();
-  });
+  openModalBtn.addEventListener('click', openModal);
 
   closeModalBtn.addEventListener('click', () => {
     modal.style.display = 'none';
@@ -197,26 +194,6 @@ function setupModal() {
     addPhotoView.style.display = 'none';
   });
 }
-
-/*document.addEventListener('DOMContentLoaded', () => {
-  const addPhotoForm = document.getElementById('addPhotoForm');
-  const imageInput = document.getElementById('imagePreview');
-  const previewImage = document.createElement('img');
-
-  previewImage.style.maxWidth = '100%';
-  previewImage.style.marginTop = '10px';
-
-  if (imageInput) {
-    imageInput.addEventListener('change', handleImagePreview);
-  }
-
-  if (addPhotoForm) {
-    addPhotoForm.addEventListener('submit', handleAddPhoto);
-  }
-
-  setupModal();
-
-});*/
 
 document.addEventListener('DOMContentLoaded', () => {
   const addPhotoForm = document.getElementById('addPhotoForm');
@@ -251,4 +228,18 @@ function handleImagePreview(event) {
     imagePreview.src = '';
     imagePreview.style.display = 'none';
   }
+}
+
+function openModal() {
+  const modal = document.getElementById('modal');
+  const galleryView = document.getElementById('galleryView');
+  const addPhotoView = document.getElementById('addPhotoView');
+
+  modal.style.display = 'block';
+  
+  // Toujours afficher la vue galerie et cacher la vue d'ajout de photo
+  galleryView.style.display = 'block';
+  addPhotoView.style.display = 'none';
+
+  populateCategorySelect();
 }

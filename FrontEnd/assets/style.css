@@ -329,22 +329,16 @@ footer nav ul {
 	top: -85px;
 	left: -30px;
 	border-radius: 2px;
-}
-
-/*.deleteWorkBtn i {
-}*/
-
-#galleryView {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	cursor: pointer;
 }
 
 .line {
 	border: #B3B3B3 solid 1px;
 	width: 420px;
-	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
 }
 
 #addPhotoBtn {
@@ -372,17 +366,20 @@ footer nav ul {
 	align-items: center;
 }
 
-#addPhotoForm input {
+#addPhotoForm i {
+	color: #B9C5CC;
+	width: 76px;
+}
+
+#addPhoto input[type="file"] {
+	opacity: 0;
+	z-index: 0;
 	width: 420px;
-	height: 169px;
-    font-size: 1.2em;
-    border: none;
-	border-radius: 10px;
-	background: #E8F1F6;
 }
 
 #addPhotoForm #title {
 	height: 50px;
+	width: 420px;
     font-size: 1.2em;
     border: none;
 	background: white;
@@ -428,13 +425,44 @@ button[type="submit"]{
 	cursor: pointer;
 }
 
-#imagePreview {
-	max-width: 300px;
-	max-height: 300px;
-	object-fit: contain;
-	margin-top: 10px;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	padding: 5px;
+#addPhoto {
+	z-index: 1;
+	border: none;
+	width: 420px;
+	height: 169px;
+    font-size: 1.2em;
+    border: none;
+	border-radius: 10px;
+	background: #E8F1F6;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
 
-  }
+.addBtn {
+	width: 173px;
+	height: 36px;
+	border-radius: 50px;
+	background: #CBD6DC;
+	text-align: center;
+	color: #306685;
+	font-weight: bold;
+}
+
+.addPhotoDtl {
+	width: 94px;
+	height: 12px;
+	font-weight: 400;
+	font-size: 10px;
+	color: #444444;
+}
+
+#imagePreview {
+	width: 420px;
+	height: 169px;
+	object-fit: contain;
+	border: none;
+	display: none;
+}
