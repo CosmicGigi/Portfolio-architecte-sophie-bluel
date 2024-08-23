@@ -213,22 +213,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function handleImagePreview(event) {
   const file = event.target.files[0];
-  const imagePreview = document.getElementById('imagePreview');
+  const addPhotoButton = document.getElementById('addPhoto');
   
   if (file) {
     const reader = new FileReader();
     
     reader.onload = function(e) {
-      imagePreview.src = e.target.result;
-      imagePreview.style.display = 'block';
+      addPhotoButton.style.backgroundImage = `url(${e.target.result})`;
+      addPhotoButton.style.backgroundSize = 'cover';
+      addPhotoButton.style.backgroundPosition = 'center';
+      
+      addPhotoButton.style.width = '129px';  
+      addPhotoButton.style.height = '169px';
+
     }
     
     reader.readAsDataURL(file);
   } else {
-    imagePreview.src = '';
-    imagePreview.style.display = 'none';
+    addPhotoButton.style.backgroundImage = '';
+    addPhotoButton.style.backgroundSize = '';
+    addPhotoButton.style.backgroundPosition = '';
   }
 }
+
 
 function openModal() {
   const modal = document.getElementById('modal');
@@ -237,7 +244,6 @@ function openModal() {
 
   modal.style.display = 'block';
   
-  // Toujours afficher la vue galerie et cacher la vue d'ajout de photo
   galleryView.style.display = 'block';
   addPhotoView.style.display = 'none';
 

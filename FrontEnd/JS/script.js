@@ -43,14 +43,18 @@ function renderCategoryFilters(categories) {
 
     const uniqueCategories = new Set(); // Set pour garantir l'unicité des catégories
 
-    const createCategoryButton = (name, onClickHandler) => {
+    const createCategoryButton = (name, onClickHandler, id = null) => {
         const button = createElement('button', { textContent: name });
+        if (id) {
+            button.id = id;
+        }
+
         button.addEventListener('click', onClickHandler);
         return button;
     };
 
     // Ajoute le bouton "Tous" une seule fois
-    filters.appendChild(createCategoryButton('Tous', () => filterGalleryByCategory(null)));
+    filters.appendChild(createCategoryButton('Tous', () => filterGalleryByCategory(null), 'activeBtn'));
     
     categories.forEach(category => {
         const categoryKey = category.name; // Utilise le nom comme clé unique
@@ -94,3 +98,5 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Erreur lors du chargement des données:', error);
     }
 });
+
+//vider à la fermeture modale

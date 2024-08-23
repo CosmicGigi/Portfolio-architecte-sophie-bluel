@@ -180,6 +180,12 @@ nav a:hover {
 	background-color: #1D6154;
 }
 
+#activeBtn {
+	color:white;
+	background-color: #1D6154;
+}
+/*a modifier*/
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -272,12 +278,18 @@ footer nav ul {
 
 .modal-content {
 	border-radius: 10px;
-	background-color: #fefefe;
+	background-color: #FFFFFF;
 	margin: 15% auto;
 	padding: 20px;
 	border: none;
 	width: 630px;
 	height: 688px;
+}
+
+#galleryView {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 #modalGallery {
@@ -297,8 +309,9 @@ footer nav ul {
 }
 
 .modal-work img {
-	width: 76.86px;
-	height: 102.57px;
+	width: 78.12px;
+	height: 104.08px;
+	object-fit: cover;
 }
 
 .modal-work p {
@@ -332,14 +345,13 @@ footer nav ul {
 	cursor: pointer;
 }
 
-.line {
+/*.line {
 	border: #B3B3B3 solid 1px;
 	width: 420px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
-}
+}*/
 
 #addPhotoBtn {
 	font-family: 'Syne';
@@ -359,7 +371,6 @@ footer nav ul {
 }
 
 #addPhotoForm {
-	text-align: left;
     margin-top: 30px;
     display: flex;
     flex-direction: column;
@@ -373,7 +384,6 @@ footer nav ul {
 
 #addPhoto input[type="file"] {
 	opacity: 0;
-	z-index: 0;
 	width: 420px;
 }
 
@@ -426,7 +436,6 @@ button[type="submit"]{
 }
 
 #addPhoto {
-	z-index: 1;
 	border: none;
 	width: 420px;
 	height: 169px;
@@ -460,9 +469,7 @@ button[type="submit"]{
 }
 
 #imagePreview {
-	width: 420px;
-	height: 169px;
-	object-fit: contain;
-	border: none;
 	display: none;
 }
+
+/* definir addPhotoView css / html*/
