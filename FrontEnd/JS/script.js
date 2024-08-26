@@ -98,5 +98,3 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Erreur lors du chargement des données:', error);
     }
 });
-
-//vider à la fermeture modale
