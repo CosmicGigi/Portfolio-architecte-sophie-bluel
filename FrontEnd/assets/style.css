@@ -351,7 +351,7 @@ footer nav ul {
   border-radius: 10px;
   background-color: #ffffff;
   margin: 15% auto;
-  padding: 20px;
+  padding: 50px 20px 0 20px;
   border: none;
   width: 630px;
   height: 688px;
@@ -365,10 +365,10 @@ footer nav ul {
 
 #modalGallery {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 10px;
-  padding: 60px;
+  padding: 30px 80px 30px 80px;
   flex-wrap: wrap;
 }
 
@@ -397,13 +397,12 @@ footer nav ul {
 }
 
 #line {
-  margin: 50px 0;
+  margin: 50px 100px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 420px;
-  border: #b1663c 1px solid;
+  border-top: #b3b3b3 1px solid;
 }
 
 .close {
@@ -437,13 +436,14 @@ footer nav ul {
   font-weight: 700;
   color: white;
   background-color: #1d6154;
-  margin: 2em auto;
+  margin: 80px;
   width: 237px;
   height: 36px;
   text-align: center;
   border-radius: 60px;
   cursor: pointer;
   border: none;
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -453,30 +453,21 @@ footer nav ul {
   margin-top: 30px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-}
-
-.fa-image {
-  color: #b9c5cc;
-  width: 76px;
-}
-
-#addPhoto input[type="file"] {
-  opacity: 0;
-  width: 420px;
+  gap: px;
 }
 
 #addPhotoForm #title {
   height: 50px;
   width: 420px;
-  font-size: 1.2em;
+  font-size: 14px;
+  color: #444444;
+  font-weight: 400;
   border: none;
   background: white;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-
-#addPhotoForm label {
-  margin: 2em 0 1em 0;
+  padding-left: 10px;
 }
 
 #addPhotoForm textarea {
@@ -485,11 +476,14 @@ footer nav ul {
 }
 
 #addPhotoForm select {
-  width: 420px;
+  width: 430px;
   height: 50px;
-  font-size: 1.2em;
+  font-size: 14px;
+  color: #444444;
+  font-weight: 400;
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  padding-left: 10px;
 }
 
 button[type="submit"] {
@@ -497,7 +491,7 @@ button[type="submit"] {
   font-weight: 700;
   color: white;
   background-color: #1d6154;
-  margin: 2em auto;
+  margin: 40px;
   width: 237px;
   height: 36px;
   text-align: center;
@@ -509,21 +503,11 @@ button[type="submit"] {
   align-items: center;
 }
 
-.backBtn {
-  cursor: pointer;
+input[type="file"] {
+  z-index: -1;
 }
 
-#addPhoto {
-  width: 420px;
-  height: 169px;
-  font-size: 1.2em;
-  border: none;
-  border-radius: 10px;
-  background: #e8f1f6;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.backBtn {
   cursor: pointer;
 }
 
@@ -545,10 +529,62 @@ button[type="submit"] {
   color: #444444;
 }
 
-#imagePreview {
-  display: none;
+.addPhotoTxt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
 
-.fa-image {
-  width: 76px;
+#addPhoto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 420px;
+  height: 169px;
+  background-color: #e8f1f6;
+  border: none;
+  margin: 30px;
+}
+
+#imagePreview {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: none;
+  margin-bottom: 20px;
+}
+
+.fa-image::before {
+  font-size: 76px;
+  color: #b9c5cc;
+}
+
+#addPhotoForm .add-photo-label {
+  background: #b9c5cc;
+  border-radius: 50px;
+  width: 173px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #306685;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  margin: 1em 0 1em 0;
+}
+
+#addPhotoForm p {
+  font-size: 10px;
+  color: #444444;
+}
+
+#addPhotoForm #title {
+  margin: 30px;
+}
+
+#addPhotoForm #category {
+  margin: 30px;
 }

@@ -5,6 +5,7 @@ async function fetchWorks() {
     return resp.json();
   } catch (error) {
     console.log("Erreur lors du chargement", error);
+    return [];
   }
 }
 
@@ -15,6 +16,7 @@ async function fetchCategories() {
     return resp.json();
   } catch (error) {
     console.log("Erreur lors du chargement", error);
+    return [];
   }
 }
 
@@ -58,10 +60,12 @@ async function authenticateUser(email, password) {
   }
 }
 
+// Fonction pour ajouter une photo
 async function handleAddPhoto(event) {
   event.preventDefault();
-  const form = event.target;
-  const formData = new FormData(form);
+
+  const addPhotoForm = document.getElementById("addPhotoForm");
+  const formData = new FormData(addPhotoForm);
 
   try {
     const response = await fetch(`http://localhost:5678/api/works/`, {
@@ -73,17 +77,13 @@ async function handleAddPhoto(event) {
     });
 
     if (response.ok) {
-      // alert('Photo ajoutée avec succès');
-      const works = await fetchWorks();
-      renderGallery(works);
+      console.log("Image uploadée avec succès !");
+      await renderModalGallery();
+      toggleView("galleryView");
     } else {
-      console.error(
-        "Erreur lors de l'ajout du travail:",
-        await response.text()
-      );
-      alert("Erreur lors de l'ajout de la photo");
+      console.error("Erreur lors de l'ajout de l'image.");
     }
   } catch (error) {
-    alert("Erreur lors de l'ajout de la photo");
+    console.error("Erreur", error);
   }
 }

@@ -201,7 +201,7 @@ function setupModal() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+/*document.addEventListener("DOMContentLoaded", () => {
   const addPhotoForm = document.getElementById("addPhotoForm");
   const imageInput = document.getElementById("image");
   const imagePreview = document.getElementById("imagePreview");
@@ -215,6 +215,23 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   setupModal();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const addPhotoForm = document.getElementById("addPhotoForm");
+
+  if (addPhotoForm) {
+    addPhotoForm.addEventListener("submit", handleAddPhoto);
+  }
+
+  setupModal();
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const imageInput = document.getElementById("image");
+
+  if (imageInput) {
+    imageInput.addEventListener("change", handleImagePreview);
+  }
 });
 
 function handleImagePreview(event) {
@@ -261,7 +278,86 @@ function handleImagePreview(event) {
 
     reader.readAsDataURL(file);
   }
+}*/
+
+document.addEventListener("DOMContentLoaded", () => {
+  const imageInput = document.getElementById("image");
+  if (imageInput) {
+    imageInput.addEventListener("change", handleImagePreview);
+  }
+});
+
+function handleImagePreview(event) {
+  const file = event.target.files[0];
+  const imagePreview = document.getElementById("imagePreview");
+  const addPhotoLabel = document.querySelector(".add-photo-label");
+  const icon = document.querySelector("#addPhoto i");
+  const sizephoto = document.querySelector("#addPhoto p");
+
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      imagePreview.src = e.target.result;
+      imagePreview.style.display = "block";
+      addPhotoLabel.style.display = "none";
+      icon.style.display = "none";
+      sizephoto.style.display = "none";
+    };
+    reader.readAsDataURL(file);
+  }
 }
+
+async function handleAddPhoto(event) {
+  event.preventDefault();
+
+  const title = document.getElementById("title").value;
+  const category = document.getElementById("category").value;
+  const imageInput = document.getElementById("image");
+  const file = imageInput.files[0];
+
+  if (!file) {
+    alert("Veuillez sélectionner une image.");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("category", category);
+  formData.append("image", file);
+
+  try {
+    const response = await fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
+      },
+      body: formData,
+    });
+
+    if (response.ok) {
+      await renderGallery();
+      await renderModalGallery();
+      closeModal();
+    } else {
+      throw new Error("Erreur lors de l'ajout de la photo");
+    }
+  } catch (error) {
+    console.error("Erreur:", error);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const imageInput = document.getElementById("image");
+  const addPhotoForm = document.getElementById("addPhotoForm");
+
+  if (imageInput) {
+    imageInput.addEventListener("change", handleImagePreview);
+  }
+
+  if (addPhotoForm) {
+    addPhotoForm.addEventListener("submit", handleAddPhoto);
+  }
+});
 
 function openModal() {
   const modal = document.getElementById("modal");
@@ -278,5 +374,5 @@ function openModal() {
 
 //vider le cache à la fermeture de la modal
 //mettre le bouton tous avec son filtre à l'ouverture de la page
-//faire le css de la modale
-//revue complète du code et envoie pour soutenance
+//faire le css de l'ajout photo
+//revue complète du code + W3C et envoie pour soutenance
