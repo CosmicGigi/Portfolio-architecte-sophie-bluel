@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Crée et ajoute le message d'erreur au DOM
   const errorMessage = document.createElement("p");
   errorMessage.id = "error-message";
   errorMessage.textContent = "Erreur dans l’identifiant ou le mot de passe";
