@@ -574,7 +574,7 @@ input[type="file"] {
   border-radius: 50px;
   width: 173px;
   height: 36px;
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: center;
   color: #306685;
@@ -584,11 +584,24 @@ input[type="file"] {
   margin: 1em 0 1em 0;
 }
 
+.add-photo-label {
+  text-align: center;
+  padding-top: 10px;
+}
+
 #addPhotoForm p {
   font-size: 10px;
   color: #444444;
 }
 
 #addPhotoForm label {
-  margin: 15px;
+  margin: 20px;
+}
+
+#addPhotoForm .labeltitle {
+  margin-left: -360px;
+}
+
+#addPhotoForm .labelcategory {
+  margin-left: -330px;
 }

@@ -11,7 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const addPhotoForm = document.getElementById("addPhotoForm");
   const imageInput = document.getElementById("image");
 
-  // Initialize the application
+  let allWorks = [];
+  let categories = [];
+
   initializeAuthUI();
   initializeGalleryAndFilters();
   setupEventListeners();
@@ -38,11 +40,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function initializeGalleryAndFilters() {
     try {
-      const [works, categories] = await Promise.all([
+      [allWorks, categories] = await Promise.all([
         fetchWorks(),
         fetchCategories(),
       ]);
-      renderGallery(works);
+      renderGallery(allWorks);
       renderCategoryFilters(categories);
     } catch (error) {
       console.error("Erreur lors du chargement des données:", error);
@@ -92,7 +94,8 @@ document.addEventListener("DOMContentLoaded", () => {
     sessionStorage.removeItem("userRole");
     configureLoginButton();
     hideAdminFeatures();
-    window.location.reload();
+
+    window.location.href = "login.html";
   }
 
   function openModal() {
@@ -114,8 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function renderModalGallery() {
     modalGallery.innerHTML = "";
-    const works = await fetchWorks();
-    works.forEach((work) => {
+    allWorks.forEach((work) => {
       const workElement = document.createElement("div");
       workElement.classList.add("modal-work");
       workElement.innerHTML = `
@@ -132,9 +134,8 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.addEventListener("click", async (e) => {
         const workId = e.target.closest(".deleteWorkBtn").dataset.id;
         await deleteWork(workId);
-        await renderModalGallery();
-        const works = await fetchWorks();
-        renderGallery(works);
+
+        await refreshDataAndRender();
       });
     });
   }
@@ -142,9 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function populateCategorySelect() {
     const categorySelect = document.getElementById("category");
     try {
-      const categories = await fetchCategories();
       categorySelect.innerHTML = "";
-
       categories.forEach((category) => {
         const option = document.createElement("option");
         option.value = category.id;
@@ -153,6 +152,24 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     } catch (error) {
       console.error("Erreur lors du peuplement des catégories:", error);
+    }
+  }
+
+  async function deleteWork(workId) {
+    try {
+      const resp = await fetch(`http://localhost:5678/api/works/${workId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("authToken"),
+        },
+      });
+      if (resp.ok) {
+        await refreshDataAndRender();
+      } else {
+        throw new Error("Erreur lors de la suppression");
+      }
+    } catch (error) {
+      console.error("Erreur lors de la suppression:", error);
     }
   }
 
@@ -181,7 +198,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const title = document.getElementById("title").value;
     const category = document.getElementById("category").value;
-    const imageInput = document.getElementById("image");
     const file = imageInput.files[0];
 
     if (!file) {
@@ -198,20 +214,111 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch("http://localhost:5678/api/works", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
+          Authorization: "Bearer " + sessionStorage.getItem("authToken"),
         },
         body: formData,
       });
 
       if (response.ok) {
-        await renderGallery();
-        await renderModalGallery();
-        closeModal();
+        const newWork = await response.json();
+        allWorks.push(newWork);
+
+        await refreshDataAndRender();
+
+        resetAddPhotoForm();
       } else {
         throw new Error("Erreur lors de l'ajout de la photo");
       }
     } catch (error) {
       console.error("Erreur:", error);
+    }
+  }
+
+  function resetAddPhotoForm() {
+    document.getElementById("title").value = "";
+    document.getElementById("category").value = "";
+    imageInput.value = "";
+
+    const imagePreview = document.getElementById("imagePreview");
+    imagePreview.src = "";
+    imagePreview.style.display = "none";
+
+    const addPhotoLabel = document.querySelector(".add-photo-label");
+    const icon = document.querySelector("#addPhoto i");
+    const sizephoto = document.querySelector("#addPhoto p");
+
+    addPhotoLabel.style.display = "block";
+    icon.style.display = "block";
+    sizephoto.style.display = "block";
+  }
+
+  function filterGalleryByCategory(categoryId) {
+    const filteredWorks =
+      categoryId === null
+        ? allWorks
+        : allWorks.filter((work) => work.categoryId === parseInt(categoryId));
+    renderGallery(filteredWorks);
+  }
+
+  function renderCategoryFilters(categories) {
+    const filtersContainer = document.querySelector(".filters");
+    filtersContainer.innerHTML =
+      '<button class="filter-btn active" data-id="null">Tous</button>';
+
+    categories.forEach((category) => {
+      const button = document.createElement("button");
+      button.classList.add("filter-btn");
+      button.textContent = category.name;
+      button.dataset.id = category.id;
+      filtersContainer.appendChild(button);
+    });
+
+    filtersContainer.addEventListener("click", (e) => {
+      if (e.target.classList.contains("filter-btn")) {
+        document
+          .querySelectorAll(".filter-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+        e.target.classList.add("active");
+        filterGalleryByCategory(
+          e.target.dataset.id === "null" ? null : parseInt(e.target.dataset.id)
+        );
+      }
+    });
+  }
+
+  async function fetchWorks() {
+    const response = await fetch("http://localhost:5678/api/works");
+    return await response.json();
+  }
+
+  async function fetchCategories() {
+    const response = await fetch("http://localhost:5678/api/categories");
+    return await response.json();
+  }
+
+  function renderGallery(works) {
+    const gallery = document.querySelector(".gallery");
+    gallery.innerHTML = "";
+    works.forEach((work) => {
+      const figure = document.createElement("figure");
+      figure.innerHTML = `
+        <img src="${work.imageUrl}" alt="${work.title}">
+        <figcaption>${work.title}</figcaption>
+      `;
+      gallery.appendChild(figure);
+    });
+  }
+
+  async function refreshDataAndRender() {
+    try {
+      [allWorks, categories] = await Promise.all([
+        fetchWorks(),
+        fetchCategories(),
+      ]);
+      renderGallery(allWorks);
+      renderModalGallery();
+    } catch (error) {
+      console.error("Erreur lors du rafraîchissement des données:", error);
     }
   }
 });

@@ -1,4 +1,3 @@
-// Fonction pour récupérer les travaux depuis l'API
 async function fetchWorks() {
   try {
     const resp = await fetch("http://localhost:5678/api/works");
@@ -9,7 +8,6 @@ async function fetchWorks() {
   }
 }
 
-// Fonction pour récupérer les catégories depuis l'API
 async function fetchCategories() {
   try {
     const resp = await fetch("http://localhost:5678/api/categories");
@@ -20,22 +18,6 @@ async function fetchCategories() {
   }
 }
 
-// Fonction Delete pour travaux
-async function deleteWork(workId) {
-  try {
-    const resp = await fetch(`http://localhost:5678/api/works/${workId}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("authToken"),
-      },
-    });
-    return resp.json();
-  } catch (error) {
-    console.error("Erreur lors de la suppression:", error);
-  }
-}
-
-// Fonction pour authentifier l'utilisateur
 async function authenticateUser(email, password) {
   try {
     const response = await fetch("http://localhost:5678/api/users/login", {
@@ -60,7 +42,6 @@ async function authenticateUser(email, password) {
   }
 }
 
-// Fonction pour ajouter une photo
 async function handleAddPhoto(event) {
   event.preventDefault();
 
