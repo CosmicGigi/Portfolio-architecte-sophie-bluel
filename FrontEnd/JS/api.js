@@ -41,30 +41,3 @@ async function authenticateUser(email, password) {
     return false;
   }
 }
-
-async function handleAddPhoto(event) {
-  event.preventDefault();
-
-  const addPhotoForm = document.getElementById("addPhotoForm");
-  const formData = new FormData(addPhotoForm);
-
-  try {
-    const response = await fetch(`http://localhost:5678/api/works/`, {
-      method: "POST",
-      body: formData,
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("authToken"),
-      },
-    });
-
-    if (response.ok) {
-      console.log("Image uploadée avec succès !");
-      await renderModalGallery();
-      toggleView("galleryView");
-    } else {
-      console.error("Erreur lors de l'ajout de l'image.");
-    }
-  } catch (error) {
-    console.error("Erreur", error);
-  }
-}
